@@ -21,15 +21,16 @@ body {
     padding: 0 20px;
 }
 
-/* Header com imagem de fundo */
+/* Header com imagem de fundo - AUMENTADO */
 header {
     background-image: url('fotos/capa.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center 30%; /* Ajusta para mostrar mais os rostos */
     background-repeat: no-repeat;
     color: white;
     position: relative;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    min-height: 280px; /* Altura mínima aumentada */
 }
 
 /* Overlay escuro no header para texto ficar legível */
@@ -47,7 +48,7 @@ header::before {
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px; /* Aumentado de 20px para 40px */
     position: relative;
     z-index: 2;
     display: flex;
@@ -56,7 +57,7 @@ header::before {
     flex-wrap: wrap;
 }
 
-/* Área do logo */
+/* Área do logo - AUMENTADA */
 .logo-area {
     display: flex;
     align-items: center;
@@ -64,7 +65,7 @@ header::before {
 }
 
 .logo-img {
-    width: 80px;
+    width: 100px; /* Aumentado de 80px para 100px */
     height: auto;
     border-radius: 10px;
     background: white;
@@ -72,33 +73,34 @@ header::before {
 }
 
 .logo-texto h1 {
-    font-size: 2rem;
-    margin-bottom: 5px;
+    font-size: 2.2rem; /* Aumentado de 2rem para 2.2rem */
+    margin-bottom: 8px;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .logo-texto p {
-    font-size: 0.9rem;
+    font-size: 1rem; /* Aumentado de 0.9rem para 1rem */
     opacity: 0.95;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Navegação */
+/* Navegação - AUMENTADA */
 nav ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 30px; /* Aumentado de 25px para 30px */
     margin: 0;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    padding: 8px 0;
+    padding: 10px 0; /* Aumentado de 8px para 10px */
     transition: all 0.3s ease;
     font-weight: 500;
+    font-size: 1.05rem; /* Aumentado */
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
@@ -313,10 +315,15 @@ footer {
 
 /* Responsividade */
 @media (max-width: 768px) {
+    header {
+        min-height: 220px; /* Altura menor no mobile */
+    }
+    
     .header-container {
         flex-direction: column;
         text-align: center;
         gap: 20px;
+        padding: 30px 20px;
     }
     
     .logo-area {
@@ -326,11 +333,11 @@ footer {
     }
     
     .logo-img {
-        width: 70px;
+        width: 80px;
     }
     
     .logo-texto h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
     
     nav ul {
