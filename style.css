@@ -39,7 +39,7 @@ body::before {
 
 /* Header e Navegação */
 header {
-    background-color: rgba(44, 62, 80, 0.95);
+    background: linear-gradient(135deg, rgb(52, 152, 219), rgb(44, 62, 80));
     color: white;
     padding: 20px 0;
     position: sticky;
