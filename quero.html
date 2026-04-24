@@ -4,8 +4,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quero um agasalho</title>
+    <title>Quero um agasalho | Aqueça um Coração</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos extras específicos para a página de peças */
+        .categoria-filtro {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 30px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-categoria {
+            background: #e9ecef;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .btn-categoria.ativo {
+            background: #e67e22;
+            color: white;
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        .tamanhos-painel {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0 30px;
+            text-align: center;
+        }
+
+        .tamanhos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .tamanho-btn {
+            background: white;
+            border: 2px solid #dee2e6;
+            padding: 10px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: monospace;
+            min-width: 70px;
+        }
+
+        .tamanho-btn:hover {
+            background: #e67e22;
+            border-color: #e67e22;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .selecionado-info {
+            background: #fff3e0;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Galeria de peças */
+        .galeria {
+            margin-top: 40px;
+        }
+
+        .galeria h3 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            border-left: 4px solid #e67e22;
+            padding-left: 15px;
+        }
+
+        .pecas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .peca-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .peca-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .peca-imagem {
+            width: 100%;
+            height: 220px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #adb5bd;
+        }
+
+        .peca-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .peca-info {
+            padding: 15px;
+        }
+
+        .peca-info h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .peca-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .tipo-etiqueta {
+            display: inline-block;
+            background: #e67e22;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+
+        .sem-pecas {
+            text-align: center;
+            padding: 50px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            color: #6c757d;
+        }
+
+        .btn-solicitar {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-solicitar:hover {
+            background: #219a52;
+        }
+
+        @media (max-width: 768px) {
+            .btn-categoria {
+                padding: 8px 20px;
+                font-size: 1rem;
+            }
+            .tamanho-btn {
+                padding: 6px 16px;
+                font-size: 0.9rem;
+            }
+            .pecas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -21,7 +212,7 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="quero.html">Quero um casaco</a></li>
+                    <li><a href="quero.html" style="color: #FFD700;">Quero um casaco</a></li>
                     <li><a href="como-ajuda.html">Como doar</a></li>
                     <li><a href="parceiros.html">Parceiros</a></li>
                     <li><a href="faq.html">Quem somos</a></li>
@@ -31,14 +222,35 @@
     </header>
 
     <main>
-        <section class="section">
-            <h2>texto</h2>
-            <p style="margin-top: 20px;">Este ano, mais do que nunca, o agasalho que você doar será necessário para
-                alguém.</p>
-            <p style="margin-top: 15px;">Se você puder ajudar doando um agasalho em bom estado, mas que não usa mais,
-                procure os pontos de coleta nas escolas participantes.</p>
+        <div class="container">
+            <!-- Seção de introdução -->
+            <div class="section">
+                <h2>Escolha seu agasalho</h2>
+                <p style="margin-top: 15px;">Selecione abaixo o tipo e o tamanho que você precisa. As peças disponíveis serão exibidas para você solicitar.</p>
+                <p style="margin-top: 10px; background: #fff3cd; padding: 10px; border-radius: 10px;">📌 <strong>Dica:</strong> As peças são doadas em bom estado. Clique em "Solicitar" para entrar em contato com a escola mais próxima.</p>
+            </div>
 
-        </section>
+            <!-- Botões de categoria: Adulto / Infantil -->
+            <div class="categoria-filtro">
+                <button class="btn-categoria ativo" data-categoria="adulto">👔 ADULTO</button>
+                <button class="btn-categoria" data-categoria="infantil">🧸 INFANTIL</button>
+            </div>
+
+            <!-- Painel de tamanhos -->
+            <div class="tamanhos-painel">
+                <strong>📏 Selecione o tamanho:</strong>
+                <div class="tamanhos-grid" id="tamanhosGrid"></div>
+                <div id="infoSelecao" class="selecionado-info" style="display: none;"></div>
+            </div>
+
+            <!-- Galeria de peças disponíveis -->
+            <div class="galeria">
+                <h3>🧥 Peças disponíveis</h3>
+                <div id="pecasContainer">
+                    <!-- As peças serão carregadas via JavaScript -->
+                    <div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -60,6 +272,184 @@
             <p>&copy; Aqueça um Coração - Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        // ============================================================
+        // BANCO DE DADOS SIMULADO (PEÇAS DISPONÍVEIS)
+        // Cada peça tem: id, titulo, tipo, tamanho, imagem (placeholder), escola
+        // ============================================================
+        const pecasDisponiveis = [
+            // ADULTO
+            { id: 1, tipo: "adulto", tamanho: "P", titulo: "Jaqueta Jeans Azul", descricao: "Bom estado, tamanho P", imagem: null, escola: "EMEF Professora Maria" },
+            { id: 2, tipo: "adulto", tamanho: "P", titulo: "Moletom Cinza", descricao: "Forrado, quase novo", imagem: null, escola: "EE Alberto Santos" },
+            { id: 3, tipo: "adulto", tamanho: "M", titulo: "Casaco de Lã Vinho", descricao: "Quentinho e conservado", imagem: null, escola: "EMEF das Américas" },
+            { id: 4, tipo: "adulto", tamanho: "M", titulo: "Blusa de Frio Azul Marinho", descricao: "Com capuz", imagem: null, escola: "EE Jardim das Flores" },
+            { id: 5, tipo: "adulto", tamanho: "G", titulo: "Jaqueta Corta Vento Preta", descricao: "Impermeável", imagem: null, escola: "EMEF Central" },
+            { id: 6, tipo: "adulto", tamanho: "G", titulo: "Suéter Tricô Bege", descricao: "Peça artesanal", imagem: null, escola: "EE Santa Maria" },
+            { id: 7, tipo: "adulto", tamanho: "GG", titulo: "Casaco Tático Verde", descricao: "Muito resistente", imagem: null, escola: "EMEF Nova Esperança" },
+            { id: 8, tipo: "adulto", tamanho: "GG", titulo: "Jaqueta Acolchoada Marrom", descricao: "Ideal para frio intenso", imagem: null, escola: "EE Parque das Nações" },
+            { id: 9, tipo: "adulto", tamanho: "G1", titulo: "Moletom tamanho especial", descricao: "GGG - confortável", imagem: null, escola: "EMEF Inclusiva" },
+            { id: 10, tipo: "adulto", tamanho: "G1", titulo: "Casaco Comprido Preto", descricao: "Até os joelhos", imagem: null, escola: "EE 14 Bis" },
+            
+            // INFANTIL
+            { id: 11, tipo: "infantil", tamanho: "P", titulo: "Jaqueta Amarela Infantil", descricao: "Para crianças de 2-3 anos", imagem: null, escola: "EMEF Pequeno Príncipe" },
+            { id: 12, tipo: "infantil", tamanho: "P", titulo: "Moletom Ursinho", descricao: "Com capuz de orelhinhas", imagem: null, escola: "EE Criança Feliz" },
+            { id: 13, tipo: "infantil", tamanho: "M", titulo: "Casaco Azul Marinho", descricao: "Tamanho 6-8 anos", imagem: null, escola: "EMEF Raio de Sol" },
+            { id: 14, tipo: "infantil", tamanho: "M", titulo: "Blusa de Frio Rosa", descricao: "Com zíper", imagem: null, escola: "EE Menino Jesus" },
+            { id: 15, tipo: "infantil", tamanho: "G", titulo: "Jaqueta Jeans Infantil", descricao: "Tamanho 10 anos", imagem: null, escola: "EMEF Mundo da Criança" },
+            { id: 16, tipo: "infantil", tamanho: "G", titulo: "Moletom Estampa Animal", descricao: "Leopardo", imagem: null, escola: "EE Esperança" },
+            { id: 17, tipo: "infantil", tamanho: "GG", titulo: "Casaco Esporte Preto", descricao: "Tamanho 12 anos", imagem: null, escola: "EMEF Vila Nova" },
+            { id: 18, tipo: "infantil", tamanho: "GG", titulo: "Jaqueta Básica Vermelha", descricao: "Ótimo estado", imagem: null, escola: "EE São Francisco" },
+            { id: 19, tipo: "infantil", tamanho: "G1", titulo: "Casaco especial juvenil", descricao: "Tamanho grande infantil", imagem: null, escola: "EMEF Juventude" },
+            { id: 20, tipo: "infantil", tamanho: "G1", titulo: "Moletom Cinza Escuro", descricao: "Para adolescentes", imagem: null, escola: "EE Integração" }
+        ];
+
+        // Mapeamento de tamanhos por categoria
+        const tamanhosPorCategoria = {
+            adulto: ["P", "M", "G", "GG", "G1"],
+            infantil: ["P", "M", "G", "GG", "G1"]
+        };
+
+        // Estado atual
+        let categoriaAtual = "adulto";
+        let tamanhoSelecionado = null;
+
+        // Elementos DOM
+        const tamanhosGrid = document.getElementById("tamanhosGrid");
+        const infoSelecaoDiv = document.getElementById("infoSelecao");
+        const pecasContainer = document.getElementById("pecasContainer");
+        const botoesCategoria = document.querySelectorAll(".btn-categoria");
+
+        // Função para renderizar os botões de tamanho
+        function renderizarTamanhos() {
+            const tamanhos = tamanhosPorCategoria[categoriaAtual];
+            tamanhosGrid.innerHTML = tamanhos.map(tam => `
+                <button class="tamanho-btn" data-tamanho="${tam}">${tam}</button>
+            `).join("");
+
+            // Adicionar eventos aos novos botões
+            document.querySelectorAll(".tamanho-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const tamanho = btn.getAttribute("data-tamanho");
+                    tamanhoSelecionado = tamanho;
+                    
+                    // Atualizar visual do botão selecionado
+                    document.querySelectorAll(".tamanho-btn").forEach(b => {
+                        b.style.background = "white";
+                        b.style.borderColor = "#dee2e6";
+                        b.style.color = "#2c3e50";
+                    });
+                    btn.style.background = "#e67e22";
+                    btn.style.borderColor = "#e67e22";
+                    btn.style.color = "white";
+                    
+                    // Mostrar informação da seleção
+                    infoSelecaoDiv.style.display = "inline-flex";
+                    const categoriaNome = categoriaAtual === "adulto" ? "Adulto" : "Infantil";
+                    infoSelecaoDiv.innerHTML = `✅ Selecionado: ${categoriaNome} - Tamanho ${tamanho}`;
+                    
+                    // Carregar peças disponíveis
+                    carregarPecas();
+                });
+            });
+        }
+
+        // Função para carregar peças baseado na categoria e tamanho selecionado
+        function carregarPecas() {
+            if (!tamanhoSelecionado) {
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
+                return;
+            }
+
+            const pecasFiltradas = pecasDisponiveis.filter(peca => 
+                peca.tipo === categoriaAtual && peca.tamanho === tamanhoSelecionado
+            );
+
+            if (pecasFiltradas.length === 0) {
+                pecasContainer.innerHTML = `
+                    <div class="sem-pecas">
+                        😔 Nenhuma peça disponível no momento para ${categoriaAtual === "adulto" ? "Adulto" : "Infantil"} tamanho ${tamanhoSelecionado}.<br>
+                        <small>Tente outro tamanho ou volte em breve!</small>
+                    </div>
+                `;
+                return;
+            }
+
+            // Renderizar cards das peças
+            pecasContainer.innerHTML = `
+                <div class="pecas-grid">
+                    ${pecasFiltradas.map(peca => `
+                        <div class="peca-card">
+                            <div class="peca-imagem">
+                                ${peca.imagem ? `<img src="${peca.imagem}" alt="${peca.titulo}">` : getIconePorTipo(peca.tipo)}
+                            </div>
+                            <div class="peca-info">
+                                <h4>${peca.titulo}</h4>
+                                <p>${peca.descricao}</p>
+                                <p><small>📍 ${peca.escola}</small></p>
+                                <span class="tipo-etiqueta">${peca.tipo === "adulto" ? "Adulto" : "Infantil"} - ${peca.tamanho}</span>
+                                <button class="btn-solicitar" data-id="${peca.id}" data-nome="${peca.titulo}" data-escola="${peca.escola}">
+                                    📋 Solicitar este agasalho
+                                </button>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            `;
+
+            // Adicionar eventos aos botões de solicitar
+            document.querySelectorAll(".btn-solicitar").forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const nomePeca = btn.getAttribute("data-nome");
+                    const escola = btn.getAttribute("data-escola");
+                    alert(`🎉 Solicitação registrada!\n\nPeça: ${nomePeca}\nEscola: ${escola}\n\nEntre em contato com a escola para retirar. Agradecemos por aquecer um coração! ❤️`);
+                });
+            });
+        }
+
+        // Função auxiliar para ícone quando não tem imagem
+        function getIconePorTipo(tipo) {
+            if (tipo === "adulto") {
+                return "🧥👔";
+            }
+            return "🧸👕";
+        }
+
+        // Alternar categoria
+        function setCategoria(categoria) {
+            categoriaAtual = categoria;
+            
+            // Atualizar estilo dos botões
+            botoesCategoria.forEach(btn => {
+                if (btn.getAttribute("data-categoria") === categoria) {
+                    btn.classList.add("ativo");
+                } else {
+                    btn.classList.remove("ativo");
+                }
+            });
+            
+            // Reset tamanho selecionado
+            tamanhoSelecionado = null;
+            infoSelecaoDiv.style.display = "none";
+            infoSelecaoDiv.innerHTML = "";
+            
+            // Re-renderizar tamanhos e limpar peças
+            renderizarTamanhos();
+            pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
+        }
+
+        // Eventos das categorias
+        botoesCategoria.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const categoria = btn.getAttribute("data-categoria");
+                setCategoria(categoria);
+            });
+        });
+
+        // Inicializar página
+        renderizarTamanhos();
+    </script>
 </body>
 
 </html>
