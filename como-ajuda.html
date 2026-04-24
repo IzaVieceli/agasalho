@@ -246,13 +246,15 @@
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
-            
+
             .linha-dupla {
                 grid-template-columns: 1fr;
                 gap: 0;
             }
-            
-            .info-doacao, .form-doacao, .itens-doacao {
+
+            .info-doacao,
+            .form-doacao,
+            .itens-doacao {
                 padding: 24px;
             }
         }
@@ -274,7 +276,6 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="quero.html">Quero um casaco</a></li>
                     <li><a href="como-ajuda.html" style="color: #FFD700;">Como doar</a></li>
-                    <li><a href="parceiros.html">Parceiros</a></li>
                     <li><a href="faq.html">Quem somos</a></li>
                 </ul>
             </nav>
@@ -286,8 +287,11 @@
             <!-- Seção de introdução -->
             <div class="section">
                 <h2>💝 Sua doação aquece um coração</h2>
-                <p style="margin-top: 15px; font-size: 1.1rem;">Cada agasalho doado é um abraço quente para quem mais precisa. Participe dessa corrente do bem!</p>
-                <p style="margin-top: 10px;">Milhares de pessoas enfrentam o frio sem a proteção adequada. Com sua ajuda, podemos levar conforto e dignidade para crianças, adultos e idosos em situação de vulnerabilidade.</p>
+                <p style="margin-top: 15px; font-size: 1.1rem;">Cada agasalho doado é um abraço quente para quem mais
+                    precisa. Participe dessa corrente do bem!</p>
+                <p style="margin-top: 10px;">Milhares de pessoas enfrentam o frio sem a proteção adequada. Com sua
+                    ajuda, podemos levar conforto e dignidade para crianças, adultos e idosos em situação de
+                    vulnerabilidade.</p>
             </div>
 
             <!-- Container principal com info + formulário -->
@@ -302,7 +306,7 @@
                         <li>Seu agasalho vai direto para quem precisa</li>
                         <li>Você receberá um certificado de agradecimento por e-mail</li>
                     </ul>
-                    
+
                     <div class="pontos-coleta">
                         <h4>📍 Pontos de coleta fixos:</h4>
                         <p>🏫 Escola Alfredo Parodi, C E-Ef M Profis - Uberaba</p>
@@ -316,7 +320,7 @@
                 <!-- Lado direito - Formulário -->
                 <div class="form-doacao">
                     <h3>Formulário de Doação</h3>
-                    
+
                     <!-- FORMULÁRIO QUE ENVIA PARA O E-MAIL -->
                     <form id="formDoacao" action="https://formsubmit.co/aquecaumcoracao01@gmail.com" method="POST">
                         <!-- Configurações do FormSubmit -->
@@ -327,12 +331,12 @@
                         <input type="hidden" name="_next" value="https://aquecaucoracao.com.br/obrigado">
                         <!-- Como não temos domínio, redireciona para uma mensagem de sucesso na própria página -->
                         <input type="hidden" name="_next" value="#sucesso">
-                        
+
                         <div class="grupo-form">
                             <label>Nome completo <span class="obrigatorio">*</span></label>
                             <input type="text" name="nome" required placeholder="Seu nome completo">
                         </div>
-                        
+
                         <div class="linha-dupla">
                             <div class="grupo-form">
                                 <label>E-mail <span class="obrigatorio">*</span></label>
@@ -343,12 +347,12 @@
                                 <input type="tel" name="telefone" required placeholder="(11) 99999-9999">
                             </div>
                         </div>
-                        
+
                         <div class="grupo-form">
                             <label>CEP (opcional)</label>
                             <input type="text" name="cep" placeholder="00000-000" id="cep">
                         </div>
-                        
+
                         <div class="grupo-form">
                             <label>O que você quer doar? <span class="obrigatorio">*</span></label>
                             <select name="tipo_doacao" required>
@@ -361,7 +365,7 @@
                                 <option value="outros">Outros itens de inverno</option>
                             </select>
                         </div>
-                        
+
                         <div class="linha-dupla">
                             <div class="grupo-form">
                                 <label>Tamanho</label>
@@ -383,7 +387,7 @@
                                 <input type="number" name="quantidade" min="1" value="1">
                             </div>
                         </div>
-                        
+
                         <div class="grupo-form">
                             <label>Estado do item</label>
                             <select name="estado">
@@ -393,7 +397,7 @@
                                 <option value="regular">Regular (ainda serve)</option>
                             </select>
                         </div>
-                        
+
                         <div class="grupo-form">
                             <label>Como prefere entregar?</label>
                             <select name="entrega">
@@ -401,30 +405,31 @@
                                 <option value="busca_agendar">Quero agendar a busca (grátis)</option>
                             </select>
                         </div>
-                        
+
                         <div class="grupo-form">
                             <label>Observações (opcional)</label>
                             <textarea name="observacoes" rows="3" placeholder="Alguma informação adicional?"></textarea>
                         </div>
-                        
+
                         <button type="submit" class="btn-enviar">📤 Enviar doação</button>
-                        
+
                         <p style="font-size: 0.75rem; text-align: center; margin-top: 15px; color: #95a5a6;">
                             Seus dados estão seguros. Usaremos apenas para contato sobre a doação.
                         </p>
                     </form>
-                    
+
                     <div id="mensagemSucesso" class="mensagem-sucesso">
                         🎉 <strong>Doação registrada com sucesso!</strong><br>
-                        Em breve entraremos em contato pelo WhatsApp ou e-mail. Muito obrigado por aquecer um coração! ❤️
+                        Em breve entraremos em contato pelo WhatsApp ou e-mail. Muito obrigado por aquecer um coração!
+                        ❤️
                     </div>
-                    
+
                     <div id="mensagemErro" class="mensagem-erro">
                         ⚠️ Ocorreu um erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.
                     </div>
                 </div>
             </div>
-            
+
             <!-- O que doar -->
             <div class="itens-doacao">
                 <h3>✨ O que você pode doar?</h3>
@@ -460,8 +465,10 @@
                         <p>Novas ou pouco usadas</p>
                     </div>
                 </div>
-                <p style="text-align: center; margin-top: 30px; padding: 15px; background: #fff3e0; border-radius: 16px;">
-                    📦 <strong>Não se preocupe com o transporte!</strong> Temos voluntários que buscam sua doação em casa (região metropolitana).
+                <p
+                    style="text-align: center; margin-top: 30px; padding: 15px; background: #fff3e0; border-radius: 16px;">
+                    📦 <strong>Não se preocupe com o transporte!</strong> Temos voluntários que buscam sua doação em
+                    casa (região metropolitana).
                 </p>
             </div>
         </div>
@@ -491,56 +498,56 @@
         const form = document.getElementById('formDoacao');
         const msgSucesso = document.getElementById('mensagemSucesso');
         const msgErro = document.getElementById('mensagemErro');
-        
+
         // Máscara para telefone (opcional)
         const telInput = document.querySelector('input[name="telefone"]');
         if (telInput) {
-            telInput.addEventListener('input', function(e) {
+            telInput.addEventListener('input', function (e) {
                 let valor = e.target.value.replace(/\D/g, '');
                 if (valor.length <= 11) {
                     if (valor.length > 2) {
-                        valor = `(${valor.substring(0,2)}) ${valor.substring(2)}`;
+                        valor = `(${valor.substring(0, 2)}) ${valor.substring(2)}`;
                     }
                     if (valor.length > 10) {
-                        valor = `${valor.substring(0,10)}-${valor.substring(10)}`;
+                        valor = `${valor.substring(0, 10)}-${valor.substring(10)}`;
                     }
                     e.target.value = valor;
                 }
             });
         }
-        
+
         // Máscara para CEP
         const cepInput = document.querySelector('input[name="cep"]');
         if (cepInput) {
-            cepInput.addEventListener('input', function(e) {
+            cepInput.addEventListener('input', function (e) {
                 let valor = e.target.value.replace(/\D/g, '');
                 if (valor.length > 5) {
-                    valor = `${valor.substring(0,5)}-${valor.substring(5,8)}`;
+                    valor = `${valor.substring(0, 5)}-${valor.substring(5, 8)}`;
                 }
                 e.target.value = valor;
             });
         }
-        
+
         // Interceptar envio do formulário para mostrar mensagem sem sair da página
         // Isso funciona porque o FormSubmit redireciona, mas podemos mostrar feedback antes
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             // Mostra mensagem de "enviando" e permite o envio normal
             const btn = form.querySelector('.btn-enviar');
             const textoOriginal = btn.innerHTML;
             btn.innerHTML = '📤 Enviando...';
             btn.disabled = true;
-            
+
             // O formulário vai enviar para o FormSubmit normalmente
             // Se quiser manter na página sem redirecionar, precisaria de AJAX
             // Mas o FormSubmit é simples e redireciona. Vamos deixar assim.
-            
+
             // Pequeno timeout para mostrar que enviou (o redirect acontece rápido)
             setTimeout(() => {
                 btn.innerHTML = textoOriginal;
                 btn.disabled = false;
             }, 2000);
         });
-        
+
         // Verificar se veio parâmetro de sucesso na URL (#sucesso)
         if (window.location.hash === '#sucesso') {
             msgSucesso.style.display = 'block';
