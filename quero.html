@@ -35,6 +35,44 @@
             box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
         }
 
+        /* Filtro de gênero */
+        .genero-filtro {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-genero {
+            background: white;
+            border: 2px solid #dee2e6;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .btn-genero.ativo {
+            background: #2c3e50;
+            border-color: #2c3e50;
+            color: white;
+        }
+
+        .btn-genero[data-genero="masculino"].ativo {
+            background: #2980b9;
+            border-color: #2980b9;
+        }
+
+        .btn-genero[data-genero="feminino"].ativo {
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+
         .tamanhos-painel {
             background: #f8f9fa;
             border-radius: 20px;
@@ -97,7 +135,7 @@
 
         .pecas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
 
@@ -124,6 +162,7 @@
             justify-content: center;
             font-size: 4rem;
             color: #adb5bd;
+            position: relative;
         }
 
         .peca-imagem img {
@@ -148,6 +187,13 @@
             margin-bottom: 5px;
         }
 
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
         .tipo-etiqueta {
             display: inline-block;
             background: #e67e22;
@@ -155,7 +201,23 @@
             padding: 3px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
-            margin-top: 8px;
+        }
+
+        .genero-etiqueta {
+            display: inline-block;
+            background: #6c5ce7;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .genero-etiqueta.masculino {
+            background: #2980b9;
+        }
+
+        .genero-etiqueta.feminino {
+            background: #c0392b;
         }
 
         .sem-pecas {
@@ -187,6 +249,10 @@
             .btn-categoria {
                 padding: 8px 20px;
                 font-size: 1rem;
+            }
+            .btn-genero {
+                padding: 6px 20px;
+                font-size: 0.9rem;
             }
             .tamanho-btn {
                 padding: 6px 16px;
@@ -226,7 +292,7 @@
             <!-- Seção de introdução -->
             <div class="section">
                 <h2>Escolha seu agasalho</h2>
-                <p style="margin-top: 15px;">Selecione abaixo o tipo e o tamanho que você precisa. As peças disponíveis serão exibidas para você solicitar.</p>
+                <p style="margin-top: 15px;">Selecione abaixo o tipo, gênero e tamanho que você precisa. As peças disponíveis serão exibidas para você solicitar.</p>
                 <p style="margin-top: 10px; background: #fff3cd; padding: 10px; border-radius: 10px;">📌 <strong>Dica:</strong> As peças são doadas em bom estado. Clique em "Solicitar" para entrar em contato com a escola mais próxima.</p>
             </div>
 
@@ -234,6 +300,13 @@
             <div class="categoria-filtro">
                 <button class="btn-categoria ativo" data-categoria="adulto">👔 ADULTO</button>
                 <button class="btn-categoria" data-categoria="infantil">🧸 INFANTIL</button>
+            </div>
+
+            <!-- Filtro de Gênero (Masculino/Feminino/Unissex) -->
+            <div class="genero-filtro">
+                <button class="btn-genero ativo" data-genero="masculino">👨 Masculino</button>
+                <button class="btn-genero" data-genero="feminino">👩 Feminino</button>
+                <button class="btn-genero" data-genero="unissex">🌟 Unissex</button>
             </div>
 
             <!-- Painel de tamanhos -->
@@ -275,43 +348,60 @@
 
     <script>
         // ============================================================
-        // BANCO DE DADOS SIMULADO (PEÇAS DISPONÍVEIS)
-        // Cada peça tem: id, titulo, tipo, tamanho, imagem (placeholder), escola
+        // BANCO DE DADOS SIMULADO (PEÇAS DISPONÍVEIS - COM GÊNERO)
         // ============================================================
         const pecasDisponiveis = [
-            // ADULTO
-            { id: 1, tipo: "adulto", tamanho: "P", titulo: "Jaqueta Jeans Azul", descricao: "Bom estado, tamanho P", imagem: null, escola: "EMEF Professora Maria" },
-            { id: 2, tipo: "adulto", tamanho: "P", titulo: "Moletom Cinza", descricao: "Forrado, quase novo", imagem: null, escola: "EE Alberto Santos" },
-            { id: 3, tipo: "adulto", tamanho: "M", titulo: "Casaco de Lã Vinho", descricao: "Quentinho e conservado", imagem: null, escola: "EMEF das Américas" },
-            { id: 4, tipo: "adulto", tamanho: "M", titulo: "Blusa de Frio Azul Marinho", descricao: "Com capuz", imagem: null, escola: "EE Jardim das Flores" },
-            { id: 5, tipo: "adulto", tamanho: "G", titulo: "Jaqueta Corta Vento Preta", descricao: "Impermeável", imagem: null, escola: "EMEF Central" },
-            { id: 6, tipo: "adulto", tamanho: "G", titulo: "Suéter Tricô Bege", descricao: "Peça artesanal", imagem: null, escola: "EE Santa Maria" },
-            { id: 7, tipo: "adulto", tamanho: "GG", titulo: "Casaco Tático Verde", descricao: "Muito resistente", imagem: null, escola: "EMEF Nova Esperança" },
-            { id: 8, tipo: "adulto", tamanho: "GG", titulo: "Jaqueta Acolchoada Marrom", descricao: "Ideal para frio intenso", imagem: null, escola: "EE Parque das Nações" },
-            { id: 9, tipo: "adulto", tamanho: "G1", titulo: "Moletom tamanho especial", descricao: "GGG - confortável", imagem: null, escola: "EMEF Inclusiva" },
-            { id: 10, tipo: "adulto", tamanho: "G1", titulo: "Casaco Comprido Preto", descricao: "Até os joelhos", imagem: null, escola: "EE 14 Bis" },
+            // ADULTO - MASCULINO
+            { id: 1, tipo: "adulto", genero: "masculino", tamanho: "P", titulo: "Jaqueta Jeans Azul", descricao: "Bom estado, tamanho P", imagem: null, escola: "EMEF Professora Maria" },
+            { id: 2, tipo: "adulto", genero: "masculino", tamanho: "P", titulo: "Moletom Cinza", descricao: "Forrado, quase novo", imagem: null, escola: "EE Alberto Santos" },
+            { id: 3, tipo: "adulto", genero: "masculino", tamanho: "M", titulo: "Casaco de Lã Vinho", descricao: "Quentinho e conservado", imagem: null, escola: "EMEF das Américas" },
+            { id: 4, tipo: "adulto", genero: "masculino", tamanho: "M", titulo: "Blusa de Frio Azul Marinho", descricao: "Com capuz", imagem: null, escola: "EE Jardim das Flores" },
+            { id: 5, tipo: "adulto", genero: "masculino", tamanho: "G", titulo: "Jaqueta Corta Vento Preta", descricao: "Impermeável", imagem: null, escola: "EMEF Central" },
+            { id: 6, tipo: "adulto", genero: "masculino", tamanho: "G", titulo: "Suéter Tricô Bege", descricao: "Peça artesanal", imagem: null, escola: "EE Santa Maria" },
+            { id: 7, tipo: "adulto", genero: "masculino", tamanho: "GG", titulo: "Casaco Tático Verde", descricao: "Muito resistente", imagem: null, escola: "EMEF Nova Esperança" },
+            { id: 8, tipo: "adulto", genero: "masculino", tamanho: "GG", titulo: "Jaqueta Acolchoada Marrom", descricao: "Ideal para frio intenso", imagem: null, escola: "EE Parque das Nações" },
+            { id: 9, tipo: "adulto", genero: "masculino", tamanho: "G1", titulo: "Moletom tamanho especial", descricao: "GGG - confortável", imagem: null, escola: "EMEF Inclusiva" },
+            { id: 10, tipo: "adulto", genero: "masculino", tamanho: "G1", titulo: "Casaco Comprido Preto", descricao: "Até os joelhos", imagem: null, escola: "EE 14 Bis" },
             
-            // INFANTIL
-            { id: 11, tipo: "infantil", tamanho: "P", titulo: "Jaqueta Amarela Infantil", descricao: "Para crianças de 2-3 anos", imagem: null, escola: "EMEF Pequeno Príncipe" },
-            { id: 12, tipo: "infantil", tamanho: "P", titulo: "Moletom Ursinho", descricao: "Com capuz de orelhinhas", imagem: null, escola: "EE Criança Feliz" },
-            { id: 13, tipo: "infantil", tamanho: "M", titulo: "Casaco Azul Marinho", descricao: "Tamanho 6-8 anos", imagem: null, escola: "EMEF Raio de Sol" },
-            { id: 14, tipo: "infantil", tamanho: "M", titulo: "Blusa de Frio Rosa", descricao: "Com zíper", imagem: null, escola: "EE Menino Jesus" },
-            { id: 15, tipo: "infantil", tamanho: "G", titulo: "Jaqueta Jeans Infantil", descricao: "Tamanho 10 anos", imagem: null, escola: "EMEF Mundo da Criança" },
-            { id: 16, tipo: "infantil", tamanho: "G", titulo: "Moletom Estampa Animal", descricao: "Leopardo", imagem: null, escola: "EE Esperança" },
-            { id: 17, tipo: "infantil", tamanho: "GG", titulo: "Casaco Esporte Preto", descricao: "Tamanho 12 anos", imagem: null, escola: "EMEF Vila Nova" },
-            { id: 18, tipo: "infantil", tamanho: "GG", titulo: "Jaqueta Básica Vermelha", descricao: "Ótimo estado", imagem: null, escola: "EE São Francisco" },
-            { id: 19, tipo: "infantil", tamanho: "G1", titulo: "Casaco especial juvenil", descricao: "Tamanho grande infantil", imagem: null, escola: "EMEF Juventude" },
-            { id: 20, tipo: "infantil", tamanho: "G1", titulo: "Moletom Cinza Escuro", descricao: "Para adolescentes", imagem: null, escola: "EE Integração" }
+            // ADULTO - FEMININO
+            { id: 11, tipo: "adulto", genero: "feminino", tamanho: "P", titulo: "Jaqueta Rosa Claro", descricao: "Com capuz e forro peludinho", imagem: null, escola: "EMEF Flores do Campo" },
+            { id: 12, tipo: "adulto", genero: "feminino", tamanho: "P", titulo: "Moletom Creme", descricao: "Estampa de flores", imagem: null, escola: "EE Maria Quitéria" },
+            { id: 13, tipo: "adulto", genero: "feminino", tamanho: "M", titulo: "Casaco Xadrez Vermelho", descricao: "Estilo universitário", imagem: null, escola: "EMEF Ana Neri" },
+            { id: 14, tipo: "adulto", genero: "feminino", tamanho: "M", titulo: "Jaqueta Jeans Feminina", descricao: "Com elastano, ajuste perfeito", imagem: null, escola: "EE das Rosas" },
+            { id: 15, tipo: "adulto", genero: "feminino", tamanho: "G", titulo: "Blusa de Tricô Bege", descricao: "Peça quente e elegante", imagem: null, escola: "EMEF Stella Maris" },
+            { id: 16, tipo: "adulto", genero: "feminino", tamanho: "G", titulo: "Casaco Corta Vento Lilás", descricao: "Impermeável e leve", imagem: null, escola: "EE Irmã Dulce" },
+            { id: 17, tipo: "adulto", genero: "feminino", tamanho: "GG", titulo: "Jaqueta Longa Preta", descricao: "Até os joelhos, muito quente", imagem: null, escola: "EMEF Liberdade" },
+            { id: 18, tipo: "adulto", genero: "feminino", tamanho: "GG", titulo: "Moletom Cinza Escuro", descricao: "Estilo oversized", imagem: null, escola: "EE 15 de Novembro" },
+            { id: 19, tipo: "adulto", genero: "feminino", tamanho: "G1", titulo: "Casaco Plus Size", descricao: "Tamanho especial, cor marinho", imagem: null, escola: "EMEF Inclusiva" },
+            { id: 20, tipo: "adulto", genero: "unissex", tamanho: "M", titulo: "Jaqueta Jeans Básica", descricao: "Serve qualquer gênero", imagem: null, escola: "EE Moderna" },
+            { id: 21, tipo: "adulto", genero: "unissex", tamanho: "G", titulo: "Moletom Neutro Preto", descricao: "Sem gênero definido", imagem: null, escola: "EMEF Diversidade" },
+            
+            // INFANTIL - MASCULINO
+            { id: 22, tipo: "infantil", genero: "masculino", tamanho: "P", titulo: "Jaqueta Azul Marinho", descricao: "Para crianças de 2-3 anos", imagem: null, escola: "EMEF Pequeno Príncipe" },
+            { id: 23, tipo: "infantil", genero: "masculino", tamanho: "P", titulo: "Moletom Ursinho", descricao: "Com capuz de orelhinhas", imagem: null, escola: "EE Criança Feliz" },
+            { id: 24, tipo: "infantil", genero: "masculino", tamanho: "M", titulo: "Casaco Azul Escuro", descricao: "Tamanho 6-8 anos", imagem: null, escola: "EMEF Raio de Sol" },
+            { id: 25, tipo: "infantil", genero: "masculino", tamanho: "M", titulo: "Jaqueta Jeans Menino", descricao: "Com bolsos frontais", imagem: null, escola: "EE Menino Jesus" },
+            { id: 26, tipo: "infantil", genero: "masculino", tamanho: "G", titulo: "Moletom Verde Militar", descricao: "Tamanho 10 anos", imagem: null, escola: "EMEF Mundo da Criança" },
+            { id: 27, tipo: "infantil", genero: "masculino", tamanho: "GG", titulo: "Casaco Esporte Preto", descricao: "Tamanho 12 anos", imagem: null, escola: "EMEF Vila Nova" },
+            
+            // INFANTIL - FEMININO
+            { id: 28, tipo: "infantil", genero: "feminino", tamanho: "P", titulo: "Jaqueta Rosa Bebê", descricao: "Com laço e brilho", imagem: null, escola: "EE Criança Esperança" },
+            { id: 29, tipo: "infantil", genero: "feminino", tamanho: "M", titulo: "Casaco Lilás Cintilante", descricao: "Com glitter", imagem: null, escola: "EMEF Princesinha" },
+            { id: 30, tipo: "infantil", genero: "feminino", tamanho: "G", titulo: "Moletom Unicórnio", descricao: "Estampa mágica", imagem: null, escola: "EE Magia Colorida" },
+            { id: 31, tipo: "infantil", genero: "feminino", tamanho: "GG", titulo: "Jaqueta Vermelha", descricao: "Tamanho 12 anos, muito quente", imagem: null, escola: "EMEF Estrela Guia" },
+            
+            // INFANTIL - UNISSEX
+            { id: 32, tipo: "infantil", genero: "unissex", tamanho: "P", titulo: "Moletom Amarelo", descricao: "Cor neutra, serve meninos e meninas", imagem: null, escola: "EE Arco-Íris" },
+            { id: 33, tipo: "infantil", genero: "unissex", tamanho: "M", titulo: "Jaqueta Cinza", descricao: "Estilo unissex", imagem: null, escola: "EMEF Criança Livre" },
+            { id: 34, tipo: "infantil", genero: "unissex", tamanho: "G", titulo: "Casaco Verde Neutro", descricao: "Serve qualquer criança", imagem: null, escola: "EE União" }
         ];
 
-        // Mapeamento de tamanhos por categoria
-        const tamanhosPorCategoria = {
-            adulto: ["P", "M", "G", "GG", "G1"],
-            infantil: ["P", "M", "G", "GG", "G1"]
-        };
+        // Mapeamento de tamanhos
+        const tamanhos = ["P", "M", "G", "GG", "G1"];
 
         // Estado atual
         let categoriaAtual = "adulto";
+        let generoAtual = "masculino";
         let tamanhoSelecionado = null;
 
         // Elementos DOM
@@ -319,10 +409,10 @@
         const infoSelecaoDiv = document.getElementById("infoSelecao");
         const pecasContainer = document.getElementById("pecasContainer");
         const botoesCategoria = document.querySelectorAll(".btn-categoria");
+        const botoesGenero = document.querySelectorAll(".btn-genero");
 
         // Função para renderizar os botões de tamanho
         function renderizarTamanhos() {
-            const tamanhos = tamanhosPorCategoria[categoriaAtual];
             tamanhosGrid.innerHTML = tamanhos.map(tam => `
                 <button class="tamanho-btn" data-tamanho="${tam}">${tam}</button>
             `).join("");
@@ -346,7 +436,8 @@
                     // Mostrar informação da seleção
                     infoSelecaoDiv.style.display = "inline-flex";
                     const categoriaNome = categoriaAtual === "adulto" ? "Adulto" : "Infantil";
-                    infoSelecaoDiv.innerHTML = `✅ Selecionado: ${categoriaNome} - Tamanho ${tamanho}`;
+                    const generoNome = generoAtual === "masculino" ? "Masculino" : (generoAtual === "feminino" ? "Feminino" : "Unissex");
+                    infoSelecaoDiv.innerHTML = `✅ Selecionado: ${categoriaNome} - ${generoNome} - ${tamanho}`;
                     
                     // Carregar peças disponíveis
                     carregarPecas();
@@ -354,7 +445,7 @@
             });
         }
 
-        // Função para carregar peças baseado na categoria e tamanho selecionado
+        // Função para carregar peças baseado nos filtros
         function carregarPecas() {
             if (!tamanhoSelecionado) {
                 pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
@@ -362,14 +453,18 @@
             }
 
             const pecasFiltradas = pecasDisponiveis.filter(peca => 
-                peca.tipo === categoriaAtual && peca.tamanho === tamanhoSelecionado
+                peca.tipo === categoriaAtual && 
+                peca.genero === generoAtual &&
+                peca.tamanho === tamanhoSelecionado
             );
 
             if (pecasFiltradas.length === 0) {
+                const categoriaNome = categoriaAtual === "adulto" ? "Adulto" : "Infantil";
+                const generoNome = generoAtual === "masculino" ? "Masculino" : (generoAtual === "feminino" ? "Feminino" : "Unissex");
                 pecasContainer.innerHTML = `
                     <div class="sem-pecas">
-                        😔 Nenhuma peça disponível no momento para ${categoriaAtual === "adulto" ? "Adulto" : "Infantil"} tamanho ${tamanhoSelecionado}.<br>
-                        <small>Tente outro tamanho ou volte em breve!</small>
+                        😔 Nenhuma peça disponível no momento para ${categoriaNome} ${generoNome} tamanho ${tamanhoSelecionado}.<br>
+                        <small>Tente outro tamanho, gênero ou tipo!</small>
                     </div>
                 `;
                 return;
@@ -378,22 +473,28 @@
             // Renderizar cards das peças
             pecasContainer.innerHTML = `
                 <div class="pecas-grid">
-                    ${pecasFiltradas.map(peca => `
+                    ${pecasFiltradas.map(peca => {
+                        const generoLabel = peca.genero === "masculino" ? "👨 Masculino" : (peca.genero === "feminino" ? "👩 Feminino" : "🌟 Unissex");
+                        const generoClass = peca.genero;
+                        return `
                         <div class="peca-card">
                             <div class="peca-imagem">
-                                ${peca.imagem ? `<img src="${peca.imagem}" alt="${peca.titulo}">` : getIconePorTipo(peca.tipo)}
+                                ${peca.imagem ? `<img src="${peca.imagem}" alt="${peca.titulo}">` : getIconePorTipo(peca.tipo, peca.genero)}
                             </div>
                             <div class="peca-info">
                                 <h4>${peca.titulo}</h4>
                                 <p>${peca.descricao}</p>
+                                <div class="tags">
+                                    <span class="tipo-etiqueta">${peca.tipo === "adulto" ? "Adulto" : "Infantil"} - ${peca.tamanho}</span>
+                                    <span class="genero-etiqueta ${generoClass}">${generoLabel}</span>
+                                </div>
                                 <p><small>📍 ${peca.escola}</small></p>
-                                <span class="tipo-etiqueta">${peca.tipo === "adulto" ? "Adulto" : "Infantil"} - ${peca.tamanho}</span>
-                                <button class="btn-solicitar" data-id="${peca.id}" data-nome="${peca.titulo}" data-escola="${peca.escola}">
+                                <button class="btn-solicitar" data-id="${peca.id}" data-nome="${peca.titulo}" data-escola="${peca.escola}" data-genero="${generoLabel}">
                                     📋 Solicitar este agasalho
                                 </button>
                             </div>
                         </div>
-                    `).join("")}
+                    `}).join("")}
                 </div>
             `;
 
@@ -403,17 +504,22 @@
                     e.stopPropagation();
                     const nomePeca = btn.getAttribute("data-nome");
                     const escola = btn.getAttribute("data-escola");
-                    alert(`🎉 Solicitação registrada!\n\nPeça: ${nomePeca}\nEscola: ${escola}\n\nEntre em contato com a escola para retirar. Agradecemos por aquecer um coração! ❤️`);
+                    const genero = btn.getAttribute("data-genero");
+                    alert(`🎉 Solicitação registrada!\n\nPeça: ${nomePeca}\n${genero}\nEscola: ${escola}\n\nEntre em contato com a escola para retirar.\n\nAgradecemos por aquecer um coração! ❤️`);
                 });
             });
         }
 
         // Função auxiliar para ícone quando não tem imagem
-        function getIconePorTipo(tipo) {
+        function getIconePorTipo(tipo, genero) {
             if (tipo === "adulto") {
-                return "🧥👔";
+                if (genero === "masculino") return "🧥👨";
+                if (genero === "feminino") return "🧥👩";
+                return "🧥🌟";
             }
-            return "🧸👕";
+            if (genero === "masculino") return "🧸👦";
+            if (genero === "feminino") return "🧸👧";
+            return "🧸🌟";
         }
 
         // Alternar categoria
@@ -439,11 +545,42 @@
             pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
         }
 
+        // Alternar gênero
+        function setGenero(genero) {
+            generoAtual = genero;
+            
+            // Atualizar estilo dos botões
+            botoesGenero.forEach(btn => {
+                if (btn.getAttribute("data-genero") === genero) {
+                    btn.classList.add("ativo");
+                } else {
+                    btn.classList.remove("ativo");
+                }
+            });
+            
+            // Reset tamanho selecionado
+            tamanhoSelecionado = null;
+            infoSelecaoDiv.style.display = "none";
+            infoSelecaoDiv.innerHTML = "";
+            
+            // Re-renderizar
+            renderizarTamanhos();
+            pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
+        }
+
         // Eventos das categorias
         botoesCategoria.forEach(btn => {
             btn.addEventListener("click", () => {
                 const categoria = btn.getAttribute("data-categoria");
                 setCategoria(categoria);
+            });
+        });
+
+        // Eventos dos gêneros
+        botoesGenero.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const genero = btn.getAttribute("data-genero");
+                setGenero(genero);
             });
         });
 
