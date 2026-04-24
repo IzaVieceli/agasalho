@@ -7,78 +7,140 @@
     <title>Quero um agasalho | Aqueça um Coração</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos extras específicos para a página de peças */
-        .categoria-filtro {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 30px 0 20px;
-            flex-wrap: wrap;
+        /* ============================================
+           ESTILOS EXCLUSIVOS PARA PÁGINA QUERO.HTML
+           Design mais clean, acolhedor e integrado
+        ============================================ */
+
+        /* Container principal com fundo suave */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .btn-categoria {
-            background: #e9ecef;
-            border: none;
-            padding: 12px 32px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
+        /* Card principal que agrupa tudo */
+        .card-principal {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 40px;
+            transition: transform 0.2s;
+        }
+
+        /* Cabeçalho do card com gradiente suave */
+        .card-header {
+            background: linear-gradient(135deg, #f7f3e9 0%, #fff8f0 100%);
+            padding: 32px 32px 24px;
+            border-bottom: 2px solid #f0e6d3;
+        }
+
+        .card-header h2 {
+            font-size: 1.8rem;
             color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .btn-categoria.ativo {
+        .card-header h2::before {
+            content: "🧥";
+            font-size: 2rem;
+        }
+
+        .card-header p {
+            color: #5a6e7c;
+            line-height: 1.5;
+        }
+
+        .dica {
+            background: #fef5e7;
+            border-left: 4px solid #e67e22;
+            padding: 12px 18px;
+            border-radius: 16px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: #7f5a2e;
+        }
+
+        /* Corpo do card */
+        .card-body {
+            padding: 32px;
+        }
+
+        /* Filtros em linha elegante */
+        .filtros-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #eee8e0;
+        }
+
+        .grupo-filtro {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .grupo-filtro label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #e67e22;
+            margin-bottom: 12px;
+        }
+
+        .botoes-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-filtro {
+            background: #f4f0ea;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4a5b6b;
+        }
+
+        .btn-filtro:hover {
+            background: #e8e0d5;
+            transform: translateY(-2px);
+        }
+
+        .btn-filtro.ativo {
             background: #e67e22;
             color: white;
-            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
         }
 
-        /* Filtro de gênero */
-        .genero-filtro {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .btn-genero {
-            background: white;
-            border: 2px solid #dee2e6;
-            padding: 10px 28px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            color: #2c3e50;
-        }
-
-        .btn-genero.ativo {
-            background: #2c3e50;
-            border-color: #2c3e50;
-            color: white;
-        }
-
-        .btn-genero[data-genero="masculino"].ativo {
-            background: #2980b9;
-            border-color: #2980b9;
-        }
-
-        .btn-genero[data-genero="feminino"].ativo {
-            background: #c0392b;
-            border-color: #c0392b;
-        }
-
-        .tamanhos-painel {
-            background: #f8f9fa;
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px 0 30px;
+        /* Área de tamanhos */
+        .area-tamanhos {
+            background: #faf8f4;
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 32px;
             text-align: center;
+        }
+
+        .area-tamanhos h4 {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .tamanhos-grid {
@@ -86,180 +148,190 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
-            margin-top: 20px;
         }
 
         .tamanho-btn {
             background: white;
-            border: 2px solid #dee2e6;
-            padding: 10px 24px;
+            border: 2px solid #e0d6ca;
+            padding: 12px 28px;
             font-size: 1.1rem;
             font-weight: bold;
-            border-radius: 40px;
+            border-radius: 60px;
             cursor: pointer;
             transition: all 0.2s;
             font-family: monospace;
-            min-width: 70px;
+            min-width: 80px;
+            color: #2c3e50;
         }
 
         .tamanho-btn:hover {
+            border-color: #e67e22;
+            background: #fef5e7;
+        }
+
+        .tamanho-btn.selecionado {
             background: #e67e22;
             border-color: #e67e22;
             color: white;
-            transform: translateY(-2px);
         }
 
-        .selecionado-info {
-            background: #fff3e0;
+        .info-selecao {
+            background: #e8f0fe;
             padding: 12px 20px;
-            border-radius: 50px;
+            border-radius: 60px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin: 15px 0;
-            font-size: 0.95rem;
+            gap: 12px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #2c5f8a;
         }
 
         /* Galeria de peças */
-        .galeria {
-            margin-top: 40px;
+        .galeria-header {
+            margin: 32px 0 20px;
         }
 
-        .galeria h3 {
+        .galeria-header h3 {
+            font-size: 1.5rem;
             color: #2c3e50;
-            margin-bottom: 25px;
-            font-size: 1.6rem;
-            border-left: 4px solid #e67e22;
-            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .pecas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 24px;
         }
 
         .peca-card {
             background: white;
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #f0e6dc;
         }
 
         .peca-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+            border-color: #e67e2233;
         }
 
         .peca-imagem {
-            width: 100%;
-            height: 220px;
-            background: #e9ecef;
+            height: 200px;
+            background: linear-gradient(145deg, #f9f5ef, #f0eae2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-            color: #adb5bd;
-            position: relative;
-        }
-
-        .peca-imagem img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .peca-info {
-            padding: 15px;
+            padding: 20px;
         }
 
         .peca-info h4 {
+            font-size: 1.1rem;
             color: #2c3e50;
             margin-bottom: 8px;
-            font-size: 1.1rem;
         }
 
         .peca-info p {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+            color: #6b7f8f;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
         }
 
         .tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
-        .tipo-etiqueta {
-            display: inline-block;
+        .tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .tag-tipo {
             background: #e67e22;
             color: white;
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
         }
 
-        .genero-etiqueta {
-            display: inline-block;
-            background: #6c5ce7;
-            color: white;
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-        }
-
-        .genero-etiqueta.masculino {
+        .tag-genero-masculino {
             background: #2980b9;
+            color: white;
         }
 
-        .genero-etiqueta.feminino {
+        .tag-genero-feminino {
             background: #c0392b;
+            color: white;
         }
 
-        .sem-pecas {
-            text-align: center;
-            padding: 50px;
-            background: #f8f9fa;
-            border-radius: 20px;
-            color: #6c757d;
+        .tag-genero-unissex {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .escola {
+            font-size: 0.8rem;
+            color: #95a5a6;
+            margin: 8px 0;
         }
 
         .btn-solicitar {
             background: #27ae60;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 25px;
+            padding: 10px 16px;
+            border-radius: 30px;
             cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
+            font-weight: 600;
             width: 100%;
-            transition: background 0.3s;
+            transition: background 0.2s;
+            margin-top: 12px;
         }
 
         .btn-solicitar:hover {
             background: #219a52;
         }
 
+        .sem-pecas {
+            text-align: center;
+            padding: 60px 20px;
+            background: #faf8f4;
+            border-radius: 24px;
+            color: #8b7a6b;
+        }
+
+        hr {
+            margin: 24px 0;
+            border: none;
+            border-top: 2px dotted #eee0d2;
+        }
+
         @media (max-width: 768px) {
-            .btn-categoria {
-                padding: 8px 20px;
-                font-size: 1rem;
+            .card-body {
+                padding: 20px;
             }
-            .btn-genero {
-                padding: 6px 20px;
-                font-size: 0.9rem;
+            .filtros-wrapper {
+                flex-direction: column;
+                gap: 20px;
             }
             .tamanho-btn {
-                padding: 6px 16px;
+                padding: 8px 20px;
                 font-size: 0.9rem;
             }
-            .pecas-grid {
-                grid-template-columns: 1fr;
+            .btn-filtro {
+                padding: 6px 16px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -289,39 +361,50 @@
 
     <main>
         <div class="container">
-            <!-- Seção de introdução -->
-            <div class="section">
-                <h2>Escolha seu agasalho</h2>
-                <p style="margin-top: 15px;">Selecione abaixo o tipo, gênero e tamanho que você precisa. As peças disponíveis serão exibidas para você solicitar.</p>
-                <p style="margin-top: 10px; background: #fff3cd; padding: 10px; border-radius: 10px;">📌 <strong>Dica:</strong> As peças são doadas em bom estado. Clique em "Solicitar" para entrar em contato com a escola mais próxima.</p>
-            </div>
+            <!-- Tudo dentro de um único card elegante -->
+            <div class="card-principal">
+                <div class="card-header">
+                    <h2>Escolha seu agasalho</h2>
+                    <p>Selecione abaixo o tipo, gênero e tamanho que você precisa. As peças disponíveis aparecerão para você solicitar.</p>
+                    <div class="dica">
+                        📌 <strong>Dica:</strong> As peças são doadas em bom estado. Clique em "Solicitar" para entrar em contato com a escola mais próxima.
+                    </div>
+                </div>
 
-            <!-- Botões de categoria: Adulto / Infantil -->
-            <div class="categoria-filtro">
-                <button class="btn-categoria ativo" data-categoria="adulto">👔 ADULTO</button>
-                <button class="btn-categoria" data-categoria="infantil">🧸 INFANTIL</button>
-            </div>
+                <div class="card-body">
+                    <!-- Filtros lado a lado -->
+                    <div class="filtros-wrapper">
+                        <div class="grupo-filtro">
+                            <label>👕 TIPO</label>
+                            <div class="botoes-group" id="categoriaGroup">
+                                <button class="btn-filtro ativo" data-categoria="adulto">Adulto</button>
+                                <button class="btn-filtro" data-categoria="infantil">Infantil</button>
+                            </div>
+                        </div>
+                        <div class="grupo-filtro">
+                            <label>⚧ GÊNERO</label>
+                            <div class="botoes-group" id="generoGroup">
+                                <button class="btn-filtro ativo" data-genero="masculino">Masculino</button>
+                                <button class="btn-filtro" data-genero="feminino">Feminino</button>
+                                <button class="btn-filtro" data-genero="unissex">Unissex</button>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Filtro de Gênero (Masculino/Feminino/Unissex) -->
-            <div class="genero-filtro">
-                <button class="btn-genero ativo" data-genero="masculino">👨 Masculino</button>
-                <button class="btn-genero" data-genero="feminino">👩 Feminino</button>
-                <button class="btn-genero" data-genero="unissex">🌟 Unissex</button>
-            </div>
+                    <!-- Área de tamanhos -->
+                    <div class="area-tamanhos">
+                        <h4>📏 Selecione o tamanho</h4>
+                        <div class="tamanhos-grid" id="tamanhosGrid"></div>
+                        <div id="infoSelecao" class="info-selecao" style="display: none;"></div>
+                    </div>
 
-            <!-- Painel de tamanhos -->
-            <div class="tamanhos-painel">
-                <strong>📏 Selecione o tamanho:</strong>
-                <div class="tamanhos-grid" id="tamanhosGrid"></div>
-                <div id="infoSelecao" class="selecionado-info" style="display: none;"></div>
-            </div>
-
-            <!-- Galeria de peças disponíveis -->
-            <div class="galeria">
-                <h3>🧥 Peças disponíveis</h3>
-                <div id="pecasContainer">
-                    <!-- As peças serão carregadas via JavaScript -->
-                    <div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>
+                    <!-- Galeria de peças -->
+                    <div class="galeria-header">
+                        <h3>🧥 Peças disponíveis</h3>
+                    </div>
+                    <div id="pecasContainer">
+                        <div class="sem-pecas">👈 Escolha um tamanho acima para ver as peças disponíveis</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -347,244 +430,142 @@
     </footer>
 
     <script>
-        // ============================================================
-        // BANCO DE DADOS SIMULADO (PEÇAS DISPONÍVEIS - COM GÊNERO)
-        // ============================================================
+        // ============================================
+        // BANCO DE DADOS DAS PEÇAS
+        // ============================================
         const pecasDisponiveis = [
-            // ADULTO - MASCULINO
-            { id: 1, tipo: "adulto", genero: "masculino", tamanho: "P", titulo: "Jaqueta Jeans Azul", descricao: "Bom estado, tamanho P", imagem: null, escola: "EMEF Professora Maria" },
-            { id: 2, tipo: "adulto", genero: "masculino", tamanho: "P", titulo: "Moletom Cinza", descricao: "Forrado, quase novo", imagem: null, escola: "EE Alberto Santos" },
-            { id: 3, tipo: "adulto", genero: "masculino", tamanho: "M", titulo: "Casaco de Lã Vinho", descricao: "Quentinho e conservado", imagem: null, escola: "EMEF das Américas" },
-            { id: 4, tipo: "adulto", genero: "masculino", tamanho: "M", titulo: "Blusa de Frio Azul Marinho", descricao: "Com capuz", imagem: null, escola: "EE Jardim das Flores" },
-            { id: 5, tipo: "adulto", genero: "masculino", tamanho: "G", titulo: "Jaqueta Corta Vento Preta", descricao: "Impermeável", imagem: null, escola: "EMEF Central" },
-            { id: 6, tipo: "adulto", genero: "masculino", tamanho: "G", titulo: "Suéter Tricô Bege", descricao: "Peça artesanal", imagem: null, escola: "EE Santa Maria" },
-            { id: 7, tipo: "adulto", genero: "masculino", tamanho: "GG", titulo: "Casaco Tático Verde", descricao: "Muito resistente", imagem: null, escola: "EMEF Nova Esperança" },
-            { id: 8, tipo: "adulto", genero: "masculino", tamanho: "GG", titulo: "Jaqueta Acolchoada Marrom", descricao: "Ideal para frio intenso", imagem: null, escola: "EE Parque das Nações" },
-            { id: 9, tipo: "adulto", genero: "masculino", tamanho: "G1", titulo: "Moletom tamanho especial", descricao: "GGG - confortável", imagem: null, escola: "EMEF Inclusiva" },
-            { id: 10, tipo: "adulto", genero: "masculino", tamanho: "G1", titulo: "Casaco Comprido Preto", descricao: "Até os joelhos", imagem: null, escola: "EE 14 Bis" },
-            
-            // ADULTO - FEMININO
-            { id: 11, tipo: "adulto", genero: "feminino", tamanho: "P", titulo: "Jaqueta Rosa Claro", descricao: "Com capuz e forro peludinho", imagem: null, escola: "EMEF Flores do Campo" },
-            { id: 12, tipo: "adulto", genero: "feminino", tamanho: "P", titulo: "Moletom Creme", descricao: "Estampa de flores", imagem: null, escola: "EE Maria Quitéria" },
-            { id: 13, tipo: "adulto", genero: "feminino", tamanho: "M", titulo: "Casaco Xadrez Vermelho", descricao: "Estilo universitário", imagem: null, escola: "EMEF Ana Neri" },
-            { id: 14, tipo: "adulto", genero: "feminino", tamanho: "M", titulo: "Jaqueta Jeans Feminina", descricao: "Com elastano, ajuste perfeito", imagem: null, escola: "EE das Rosas" },
-            { id: 15, tipo: "adulto", genero: "feminino", tamanho: "G", titulo: "Blusa de Tricô Bege", descricao: "Peça quente e elegante", imagem: null, escola: "EMEF Stella Maris" },
-            { id: 16, tipo: "adulto", genero: "feminino", tamanho: "G", titulo: "Casaco Corta Vento Lilás", descricao: "Impermeável e leve", imagem: null, escola: "EE Irmã Dulce" },
-            { id: 17, tipo: "adulto", genero: "feminino", tamanho: "GG", titulo: "Jaqueta Longa Preta", descricao: "Até os joelhos, muito quente", imagem: null, escola: "EMEF Liberdade" },
-            { id: 18, tipo: "adulto", genero: "feminino", tamanho: "GG", titulo: "Moletom Cinza Escuro", descricao: "Estilo oversized", imagem: null, escola: "EE 15 de Novembro" },
-            { id: 19, tipo: "adulto", genero: "feminino", tamanho: "G1", titulo: "Casaco Plus Size", descricao: "Tamanho especial, cor marinho", imagem: null, escola: "EMEF Inclusiva" },
-            { id: 20, tipo: "adulto", genero: "unissex", tamanho: "M", titulo: "Jaqueta Jeans Básica", descricao: "Serve qualquer gênero", imagem: null, escola: "EE Moderna" },
-            { id: 21, tipo: "adulto", genero: "unissex", tamanho: "G", titulo: "Moletom Neutro Preto", descricao: "Sem gênero definido", imagem: null, escola: "EMEF Diversidade" },
-            
-            // INFANTIL - MASCULINO
-            { id: 22, tipo: "infantil", genero: "masculino", tamanho: "P", titulo: "Jaqueta Azul Marinho", descricao: "Para crianças de 2-3 anos", imagem: null, escola: "EMEF Pequeno Príncipe" },
-            { id: 23, tipo: "infantil", genero: "masculino", tamanho: "P", titulo: "Moletom Ursinho", descricao: "Com capuz de orelhinhas", imagem: null, escola: "EE Criança Feliz" },
-            { id: 24, tipo: "infantil", genero: "masculino", tamanho: "M", titulo: "Casaco Azul Escuro", descricao: "Tamanho 6-8 anos", imagem: null, escola: "EMEF Raio de Sol" },
-            { id: 25, tipo: "infantil", genero: "masculino", tamanho: "M", titulo: "Jaqueta Jeans Menino", descricao: "Com bolsos frontais", imagem: null, escola: "EE Menino Jesus" },
-            { id: 26, tipo: "infantil", genero: "masculino", tamanho: "G", titulo: "Moletom Verde Militar", descricao: "Tamanho 10 anos", imagem: null, escola: "EMEF Mundo da Criança" },
-            { id: 27, tipo: "infantil", genero: "masculino", tamanho: "GG", titulo: "Casaco Esporte Preto", descricao: "Tamanho 12 anos", imagem: null, escola: "EMEF Vila Nova" },
-            
-            // INFANTIL - FEMININO
-            { id: 28, tipo: "infantil", genero: "feminino", tamanho: "P", titulo: "Jaqueta Rosa Bebê", descricao: "Com laço e brilho", imagem: null, escola: "EE Criança Esperança" },
-            { id: 29, tipo: "infantil", genero: "feminino", tamanho: "M", titulo: "Casaco Lilás Cintilante", descricao: "Com glitter", imagem: null, escola: "EMEF Princesinha" },
-            { id: 30, tipo: "infantil", genero: "feminino", tamanho: "G", titulo: "Moletom Unicórnio", descricao: "Estampa mágica", imagem: null, escola: "EE Magia Colorida" },
-            { id: 31, tipo: "infantil", genero: "feminino", tamanho: "GG", titulo: "Jaqueta Vermelha", descricao: "Tamanho 12 anos, muito quente", imagem: null, escola: "EMEF Estrela Guia" },
-            
-            // INFANTIL - UNISSEX
-            { id: 32, tipo: "infantil", genero: "unissex", tamanho: "P", titulo: "Moletom Amarelo", descricao: "Cor neutra, serve meninos e meninas", imagem: null, escola: "EE Arco-Íris" },
-            { id: 33, tipo: "infantil", genero: "unissex", tamanho: "M", titulo: "Jaqueta Cinza", descricao: "Estilo unissex", imagem: null, escola: "EMEF Criança Livre" },
-            { id: 34, tipo: "infantil", genero: "unissex", tamanho: "G", titulo: "Casaco Verde Neutro", descricao: "Serve qualquer criança", imagem: null, escola: "EE União" }
+            // ADULTO MASCULINO
+            { id: 1, tipo: "adulto", genero: "masculino", tamanho: "P", titulo: "Jaqueta Jeans Azul", descricao: "Bom estado", escola: "EMEF Professora Maria" },
+            { id: 2, tipo: "adulto", genero: "masculino", tamanho: "M", titulo: "Moletom Cinza", descricao: "Forrado, quase novo", escola: "EE Alberto Santos" },
+            { id: 3, tipo: "adulto", genero: "masculino", tamanho: "G", titulo: "Casaco de Lã Vinho", descricao: "Quentinho", escola: "EMEF das Américas" },
+            { id: 4, tipo: "adulto", genero: "masculino", tamanho: "GG", titulo: "Jaqueta Corta Vento", descricao: "Impermeável", escola: "EMEF Central" },
+            { id: 5, tipo: "adulto", genero: "masculino", tamanho: "G1", titulo: "Moletom Especial", descricao: "Tamanho GGG", escola: "EMEF Inclusiva" },
+            // ADULTO FEMININO
+            { id: 6, tipo: "adulto", genero: "feminino", tamanho: "P", titulo: "Jaqueta Rosa", descricao: "Com capuz peludinho", escola: "EMEF Flores do Campo" },
+            { id: 7, tipo: "adulto", genero: "feminino", tamanho: "M", titulo: "Casaco Xadrez", descricao: "Vermelho e preto", escola: "EMEF Ana Neri" },
+            { id: 8, tipo: "adulto", genero: "feminino", tamanho: "G", titulo: "Blusa de Tricô", descricao: "Bege, elegante", escola: "EMEF Stella Maris" },
+            { id: 9, tipo: "adulto", genero: "feminino", tamanho: "GG", titulo: "Jaqueta Longa", descricao: "Preta, até os joelhos", escola: "EMEF Liberdade" },
+            // INFANTIL MASCULINO
+            { id: 10, tipo: "infantil", genero: "masculino", tamanho: "P", titulo: "Jaqueta Azul", descricao: "2-3 anos", escola: "EMEF Pequeno Príncipe" },
+            { id: 11, tipo: "infantil", genero: "masculino", tamanho: "M", titulo: "Moletom Ursinho", descricao: "Com orelhinhas", escola: "EE Criança Feliz" },
+            { id: 12, tipo: "infantil", genero: "masculino", tamanho: "G", titulo: "Casaco Azul Escuro", descricao: "6-8 anos", escola: "EMEF Raio de Sol" },
+            // INFANTIL FEMININO
+            { id: 13, tipo: "infantil", genero: "feminino", tamanho: "P", titulo: "Jaqueta Rosa Bebê", descricao: "Com laço", escola: "EE Criança Esperança" },
+            { id: 14, tipo: "infantil", genero: "feminino", tamanho: "M", titulo: "Moletom Unicórnio", descricao: "Estampa mágica", escola: "EE Magia Colorida" },
+            // UNISSEX (adulto e infantil)
+            { id: 15, tipo: "adulto", genero: "unissex", tamanho: "M", titulo: "Jaqueta Jeans Neutra", descricao: "Serve qualquer gênero", escola: "EE Diversidade" },
+            { id: 16, tipo: "infantil", genero: "unissex", tamanho: "P", titulo: "Moletom Amarelo", descricao: "Cor neutra", escola: "EE Arco-Íris" }
         ];
 
-        // Mapeamento de tamanhos
         const tamanhos = ["P", "M", "G", "GG", "G1"];
-
-        // Estado atual
+        
         let categoriaAtual = "adulto";
         let generoAtual = "masculino";
         let tamanhoSelecionado = null;
 
-        // Elementos DOM
+        // Elementos
         const tamanhosGrid = document.getElementById("tamanhosGrid");
-        const infoSelecaoDiv = document.getElementById("infoSelecao");
+        const infoSelecao = document.getElementById("infoSelecao");
         const pecasContainer = document.getElementById("pecasContainer");
-        const botoesCategoria = document.querySelectorAll(".btn-categoria");
-        const botoesGenero = document.querySelectorAll(".btn-genero");
 
-        // Função para renderizar os botões de tamanho
+        // Renderizar tamanhos
         function renderizarTamanhos() {
             tamanhosGrid.innerHTML = tamanhos.map(tam => `
                 <button class="tamanho-btn" data-tamanho="${tam}">${tam}</button>
             `).join("");
 
-            // Adicionar eventos aos novos botões
             document.querySelectorAll(".tamanho-btn").forEach(btn => {
                 btn.addEventListener("click", () => {
-                    const tamanho = btn.getAttribute("data-tamanho");
-                    tamanhoSelecionado = tamanho;
+                    tamanhoSelecionado = btn.getAttribute("data-tamanho");
+                    document.querySelectorAll(".tamanho-btn").forEach(b => b.classList.remove("selecionado"));
+                    btn.classList.add("selecionado");
                     
-                    // Atualizar visual do botão selecionado
-                    document.querySelectorAll(".tamanho-btn").forEach(b => {
-                        b.style.background = "white";
-                        b.style.borderColor = "#dee2e6";
-                        b.style.color = "#2c3e50";
-                    });
-                    btn.style.background = "#e67e22";
-                    btn.style.borderColor = "#e67e22";
-                    btn.style.color = "white";
-                    
-                    // Mostrar informação da seleção
-                    infoSelecaoDiv.style.display = "inline-flex";
                     const categoriaNome = categoriaAtual === "adulto" ? "Adulto" : "Infantil";
-                    const generoNome = generoAtual === "masculino" ? "Masculino" : (generoAtual === "feminino" ? "Feminino" : "Unissex");
-                    infoSelecaoDiv.innerHTML = `✅ Selecionado: ${categoriaNome} - ${generoNome} - ${tamanho}`;
+                    const generoNome = { masculino: "Masculino", feminino: "Feminino", unissex: "Unissex" }[generoAtual];
+                    infoSelecao.style.display = "inline-flex";
+                    infoSelecao.innerHTML = `✅ Selecionado: ${categoriaNome} · ${generoNome} · Tamanho ${tamanhoSelecionado}`;
                     
-                    // Carregar peças disponíveis
                     carregarPecas();
                 });
             });
         }
 
-        // Função para carregar peças baseado nos filtros
         function carregarPecas() {
             if (!tamanhoSelecionado) {
-                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Escolha um tamanho acima para ver as peças disponíveis</div>`;
                 return;
             }
 
-            const pecasFiltradas = pecasDisponiveis.filter(peca => 
-                peca.tipo === categoriaAtual && 
-                peca.genero === generoAtual &&
-                peca.tamanho === tamanhoSelecionado
+            const filtradas = pecasDisponiveis.filter(p => 
+                p.tipo === categoriaAtual && p.genero === generoAtual && p.tamanho === tamanhoSelecionado
             );
 
-            if (pecasFiltradas.length === 0) {
-                const categoriaNome = categoriaAtual === "adulto" ? "Adulto" : "Infantil";
-                const generoNome = generoAtual === "masculino" ? "Masculino" : (generoAtual === "feminino" ? "Feminino" : "Unissex");
-                pecasContainer.innerHTML = `
-                    <div class="sem-pecas">
-                        😔 Nenhuma peça disponível no momento para ${categoriaNome} ${generoNome} tamanho ${tamanhoSelecionado}.<br>
-                        <small>Tente outro tamanho, gênero ou tipo!</small>
-                    </div>
-                `;
+            if (filtradas.length === 0) {
+                pecasContainer.innerHTML = `<div class="sem-pecas">😔 Nenhuma peça disponível para esta combinação.<br><small>Tente outro tamanho ou gênero</small></div>`;
                 return;
             }
 
-            // Renderizar cards das peças
             pecasContainer.innerHTML = `
                 <div class="pecas-grid">
-                    ${pecasFiltradas.map(peca => {
-                        const generoLabel = peca.genero === "masculino" ? "👨 Masculino" : (peca.genero === "feminino" ? "👩 Feminino" : "🌟 Unissex");
-                        const generoClass = peca.genero;
-                        return `
+                    ${filtradas.map(peca => `
                         <div class="peca-card">
-                            <div class="peca-imagem">
-                                ${peca.imagem ? `<img src="${peca.imagem}" alt="${peca.titulo}">` : getIconePorTipo(peca.tipo, peca.genero)}
-                            </div>
+                            <div class="peca-imagem">${iconePorPeca(peca)}</div>
                             <div class="peca-info">
                                 <h4>${peca.titulo}</h4>
                                 <p>${peca.descricao}</p>
                                 <div class="tags">
-                                    <span class="tipo-etiqueta">${peca.tipo === "adulto" ? "Adulto" : "Infantil"} - ${peca.tamanho}</span>
-                                    <span class="genero-etiqueta ${generoClass}">${generoLabel}</span>
+                                    <span class="tag tag-tipo">${peca.tipo === "adulto" ? "Adulto" : "Infantil"} · ${peca.tamanho}</span>
+                                    <span class="tag tag-genero-${peca.genero}">${generoTexto(peca.genero)}</span>
                                 </div>
-                                <p><small>📍 ${peca.escola}</small></p>
-                                <button class="btn-solicitar" data-id="${peca.id}" data-nome="${peca.titulo}" data-escola="${peca.escola}" data-genero="${generoLabel}">
-                                    📋 Solicitar este agasalho
-                                </button>
+                                <div class="escola">📍 ${peca.escola}</div>
+                                <button class="btn-solicitar" data-nome="${peca.titulo}" data-escola="${peca.escola}">📋 Solicitar este agasalho</button>
                             </div>
                         </div>
-                    `}).join("")}
+                    `).join("")}
                 </div>
             `;
 
-            // Adicionar eventos aos botões de solicitar
             document.querySelectorAll(".btn-solicitar").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    const nomePeca = btn.getAttribute("data-nome");
-                    const escola = btn.getAttribute("data-escola");
-                    const genero = btn.getAttribute("data-genero");
-                    alert(`🎉 Solicitação registrada!\n\nPeça: ${nomePeca}\n${genero}\nEscola: ${escola}\n\nEntre em contato com a escola para retirar.\n\nAgradecemos por aquecer um coração! ❤️`);
+                btn.addEventListener("click", () => {
+                    alert(`🎉 Solicitação registrada!\n\nPeça: ${btn.dataset.nome}\nEscola: ${btn.dataset.escola}\n\nEntre em contato com a escola para retirar. ❤️`);
                 });
             });
         }
 
-        // Função auxiliar para ícone quando não tem imagem
-        function getIconePorTipo(tipo, genero) {
-            if (tipo === "adulto") {
-                if (genero === "masculino") return "🧥👨";
-                if (genero === "feminino") return "🧥👩";
-                return "🧥🌟";
-            }
-            if (genero === "masculino") return "🧸👦";
-            if (genero === "feminino") return "🧸👧";
-            return "🧸🌟";
+        function iconePorPeca(peca) {
+            if (peca.tipo === "adulto") return peca.genero === "masculino" ? "🧥👨" : peca.genero === "feminino" ? "🧥👩" : "🧥🌟";
+            return peca.genero === "masculino" ? "🧸👦" : peca.genero === "feminino" ? "🧸👧" : "🧸🌟";
         }
 
-        // Alternar categoria
-        function setCategoria(categoria) {
-            categoriaAtual = categoria;
-            
-            // Atualizar estilo dos botões
-            botoesCategoria.forEach(btn => {
-                if (btn.getAttribute("data-categoria") === categoria) {
-                    btn.classList.add("ativo");
-                } else {
-                    btn.classList.remove("ativo");
-                }
-            });
-            
-            // Reset tamanho selecionado
-            tamanhoSelecionado = null;
-            infoSelecaoDiv.style.display = "none";
-            infoSelecaoDiv.innerHTML = "";
-            
-            // Re-renderizar tamanhos e limpar peças
-            renderizarTamanhos();
-            pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
+        function generoTexto(genero) {
+            return { masculino: "👨 Masculino", feminino: "👩 Feminino", unissex: "🌟 Unissex" }[genero];
         }
 
-        // Alternar gênero
-        function setGenero(genero) {
-            generoAtual = genero;
-            
-            // Atualizar estilo dos botões
-            botoesGenero.forEach(btn => {
-                if (btn.getAttribute("data-genero") === genero) {
-                    btn.classList.add("ativo");
-                } else {
-                    btn.classList.remove("ativo");
-                }
-            });
-            
-            // Reset tamanho selecionado
-            tamanhoSelecionado = null;
-            infoSelecaoDiv.style.display = "none";
-            infoSelecaoDiv.innerHTML = "";
-            
-            // Re-renderizar
-            renderizarTamanhos();
-            pecasContainer.innerHTML = `<div class="sem-pecas">👈 Selecione um tamanho para ver as peças disponíveis</div>`;
-        }
-
-        // Eventos das categorias
-        botoesCategoria.forEach(btn => {
+        // Eventos de filtro
+        document.querySelectorAll("[data-categoria]").forEach(btn => {
             btn.addEventListener("click", () => {
-                const categoria = btn.getAttribute("data-categoria");
-                setCategoria(categoria);
+                document.querySelectorAll("[data-categoria]").forEach(b => b.classList.remove("ativo"));
+                btn.classList.add("ativo");
+                categoriaAtual = btn.dataset.categoria;
+                tamanhoSelecionado = null;
+                infoSelecao.style.display = "none";
+                renderizarTamanhos();
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Escolha um tamanho acima</div>`;
             });
         });
 
-        // Eventos dos gêneros
-        botoesGenero.forEach(btn => {
+        document.querySelectorAll("[data-genero]").forEach(btn => {
             btn.addEventListener("click", () => {
-                const genero = btn.getAttribute("data-genero");
-                setGenero(genero);
+                document.querySelectorAll("[data-genero]").forEach(b => b.classList.remove("ativo"));
+                btn.classList.add("ativo");
+                generoAtual = btn.dataset.genero;
+                tamanhoSelecionado = null;
+                infoSelecao.style.display = "none";
+                renderizarTamanhos();
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Escolha um tamanho acima</div>`;
             });
         });
 
-        // Inicializar página
         renderizarTamanhos();
     </script>
 </body>
