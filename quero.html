@@ -322,6 +322,44 @@
             border-top: 2px dotted #eee0d2;
         }
 
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #e67e22;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .back-to-top:hover {
+            background: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top .seta {
+            line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .card-body {
                 padding: 20px;
@@ -340,6 +378,14 @@
             .btn-filtro {
                 padding: 6px 16px;
                 font-size: 0.8rem;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -442,6 +488,11 @@
         </div>
     </footer>
 
+    <!-- Botão Voltar ao Topo (posicionado antes do script) -->
+    <div class="back-to-top" id="backToTop">
+        <span class="seta">↑</span>
+    </div>
+
     <script>
         // ============================================
         // BANCO DE DADOS DAS PEÇAS - VERSÃO ATUALIZADA COM MUITOS MAIS ITENS
@@ -502,7 +553,7 @@
         const tamanhosPorCategoria = {
             adulto: ["P", "M", "G", "GG", "G1"],
             infantil: ["P", "M", "G", "GG", "G1"],
-            calcados: ["P", "M", "G", "GG", "Infantil P", "Infantil M"],
+            calcados: ["P", "M", "G", "Infantil P", "Infantil M"],
             cobertores: ["Único"],
             acessorios: ["Único"]
         };
@@ -657,63 +708,10 @@
             });
         });
 
+        // Inicialização e Botão Voltar ao Topo
         renderizarTamanhos();
-    </script>
- <!-- Botão Voltar ao Topo -->
-    <div class="back-to-top" id="backToTop">
-        <span class="seta">↑</span>
-    </div>
 
-    <style>
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #e67e22;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .back-to-top:hover {
-            background: #d35400;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top .seta {
-            line-height: 1;
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-
-    <script>
+        // Script do Botão Voltar ao Topo
         const backToTop = document.getElementById('backToTop');
 
         window.addEventListener('scroll', () => {
