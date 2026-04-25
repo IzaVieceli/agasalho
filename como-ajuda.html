@@ -241,6 +241,44 @@
             font-size: 0.85rem;
         }
 
+        /* Estilos do botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #e67e22;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .back-to-top:hover {
+            background: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top .seta {
+            line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .doacao-container {
                 grid-template-columns: 1fr;
@@ -256,6 +294,14 @@
             .form-doacao,
             .itens-doacao {
                 padding: 24px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -493,6 +539,11 @@
         </div>
     </footer>
 
+    <!-- Botão Voltar ao Topo (posicionado antes do script) -->
+    <div class="back-to-top" id="backToTop">
+        <span class="seta">↑</span>
+    </div>
+
     <script>
         // Script para mostrar mensagem de sucesso/erro (sem redirecionar)
         const form = document.getElementById('formDoacao');
@@ -529,19 +580,12 @@
         }
 
         // Interceptar envio do formulário para mostrar mensagem sem sair da página
-        // Isso funciona porque o FormSubmit redireciona, mas podemos mostrar feedback antes
         form.addEventListener('submit', function (e) {
-            // Mostra mensagem de "enviando" e permite o envio normal
             const btn = form.querySelector('.btn-enviar');
             const textoOriginal = btn.innerHTML;
             btn.innerHTML = '📤 Enviando...';
             btn.disabled = true;
 
-            // O formulário vai enviar para o FormSubmit normalmente
-            // Se quiser manter na página sem redirecionar, precisaria de AJAX
-            // Mas o FormSubmit é simples e redireciona. Vamos deixar assim.
-
-            // Pequeno timeout para mostrar que enviou (o redirect acontece rápido)
             setTimeout(() => {
                 btn.innerHTML = textoOriginal;
                 btn.disabled = false;
@@ -551,138 +595,14 @@
         // Verificar se veio parâmetro de sucesso na URL (#sucesso)
         if (window.location.hash === '#sucesso') {
             msgSucesso.style.display = 'block';
-            // Scroll suave até a mensagem
             msgSucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Esconder após 5 segundos
             setTimeout(() => {
                 msgSucesso.style.display = 'none';
-                // Remove o hash da URL
                 history.pushState("", document.title, window.location.pathname + window.location.search);
             }, 5000);
         }
-    </script>
-    <style>
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #e67e22;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
 
-        .back-to-top:hover {
-            background: #d35400;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top .seta {
-            line-height: 1;
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-
-    <script>
-        const backToTop = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
- <!-- Botão Voltar ao Topo -->
-    <div class="back-to-top" id="backToTop">
-        <span class="seta">↑</span>
-    </div>
-
-    <style>
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #e67e22;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .back-to-top:hover {
-            background: #d35400;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top .seta {
-            line-height: 1;
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-
-    <script>
+        // Script do Botão Voltar ao Topo
         const backToTop = document.getElementById('backToTop');
 
         window.addEventListener('scroll', () => {
