@@ -506,7 +506,7 @@
         </div>
     </footer>
 
-    <!-- Botão Voltar ao Topo (posicionado antes do script) -->
+    <!-- Botão Voltar ao Topo -->
     <div class="back-to-top" id="backToTop">
         <span class="seta">↑</span>
     </div>
@@ -516,7 +516,7 @@
         // BANCO DE DADOS DAS PEÇAS - COM IMAGENS REAIS
         // ============================================
         const pecasDisponiveis = [
-            // ========== ADULTO - MASCULINO (Roupas) ==========
+            // ========== ADULTO - MASCULINO ==========
             { 
                 id: 1, 
                 tipo: "adulto", 
@@ -578,7 +578,7 @@
                 imagem: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&h=300&fit=crop"
             },
 
-            // ========== ADULTO - FEMININO (Roupas) ==========
+            // ========== ADULTO - FEMININO ==========
             { 
                 id: 7, 
                 tipo: "adulto", 
@@ -630,7 +630,7 @@
                 imagem: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=300&fit=crop"
             },
 
-            // ========== INFANTIL (Roupas) ==========
+            // ========== INFANTIL ==========
             { 
                 id: 12, 
                 tipo: "infantil", 
@@ -895,4 +895,196 @@
                 titulo: "Cachecol Infantil", 
                 descricao: "Cor amarela, macio", 
                 escola: "Alfredo Parodi",
-                imagem: "https://
+                imagem: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c7?w=400&h=300&fit=crop"
+            }
+        ];
+
+        // Configuração de tamanhos por categoria
+        const tamanhosPorCategoria = {
+            adulto: ["P", "M", "G", "GG", "G1"],
+            infantil: ["P", "M", "G", "GG", "G1"],
+            calcados: ["P", "M", "G"],
+            cobertores: ["Único"],
+            acessorios: ["Único"]
+        };
+
+        let categoriaAtual = "adulto";
+        let generoAtual = "masculino";
+        let tamanhoSelecionado = null;
+
+        // Elementos
+        const tamanhosGrid = document.getElementById("tamanhosGrid");
+        const infoSelecao = document.getElementById("infoSelecao");
+        const pecasContainer = document.getElementById("pecasContainer");
+
+        // Renderizar tamanhos baseado na categoria
+        function renderizarTamanhos() {
+            const tamanhos = tamanhosPorCategoria[categoriaAtual] || ["P", "M", "G"];
+
+            tamanhosGrid.innerHTML = tamanhos.map(tam => `
+                <button class="tamanho-btn" data-tamanho="${tam}">${tam}</button>
+            `).join("");
+
+            document.querySelectorAll(".tamanho-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    tamanhoSelecionado = btn.getAttribute("data-tamanho");
+                    document.querySelectorAll(".tamanho-btn").forEach(b => b.classList.remove("selecionado"));
+                    btn.classList.add("selecionado");
+
+                    const categoriaNome = {
+                        adulto: "Adulto",
+                        infantil: "Infantil",
+                        calcados: "Calçados",
+                        cobertores: "Cobertores",
+                        acessorios: "Acessórios"
+                    }[categoriaAtual];
+
+                    const generoNome = { masculino: "Masculino", feminino: "Feminino", unissex: "Unissex" }[generoAtual];
+                    infoSelecao.style.display = "inline-flex";
+                    infoSelecao.innerHTML = `✅ Selecionado: ${categoriaNome} · ${generoNome} · ${tamanhoSelecionado}`;
+
+                    carregarPecas();
+                });
+            });
+        }
+
+        function carregarPecas() {
+            if (!tamanhoSelecionado) {
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Escolha um tamanho acima para ver os itens disponíveis</div>`;
+                return;
+            }
+
+            const filtradas = pecasDisponiveis.filter(p => {
+                // Filtro por categoria
+                if (p.tipo !== categoriaAtual) return false;
+                
+                // Filtro por gênero (se não for unissex)
+                if (p.genero !== generoAtual && p.genero !== "unissex") return false;
+                
+                // Filtro por tamanho
+                if (p.tamanho !== tamanhoSelecionado) return false;
+
+                return true;
+            });
+
+            if (filtradas.length === 0) {
+                const categoriaNome = {
+                    adulto: "roupas adulto",
+                    infantil: "roupas infantil",
+                    calcados: "calçados",
+                    cobertores: "cobertores",
+                    acessorios: "acessórios"
+                }[categoriaAtual];
+                pecasContainer.innerHTML = `<div class="sem-pecas">😔 Nenhum item disponível no momento para ${categoriaNome} ${generoAtual} tamanho ${tamanhoSelecionado}.<br><small>Tente outra categoria, gênero ou tamanho! Novos itens chegam toda semana.</small></div>`;
+                return;
+            }
+
+            pecasContainer.innerHTML = `
+                <div class="pecas-grid">
+                    ${filtradas.map(peca => `
+                        <div class="peca-card">
+                            <div class="peca-imagem">
+                                ${peca.imagem ? 
+                                    `<img src="${peca.imagem}" alt="${peca.titulo}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\'fallback-icon\\'>${iconePorPeca(peca)}</span>'">` : 
+                                    `<span class="fallback-icon">${iconePorPeca(peca)}</span>`
+                                }
+                            </div>
+                            <div class="peca-info">
+                                <h4>${peca.titulo}</h4>
+                                <p>${peca.descricao}</p>
+                                <div class="tags">
+                                    <span class="tag tag-categoria">${categoriaLabel(peca.tipo)}</span>
+                                    <span class="tag tag-genero-${peca.genero}">${generoTexto(peca.genero)}</span>
+                                    <span class="tag tag-tipo">${peca.tamanho}</span>
+                                </div>
+                                <div class="escola">📍 ${peca.escola}</div>
+                                <button class="btn-solicitar" data-nome="${peca.titulo}" data-escola="${peca.escola}">📋 Solicitar este item</button>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            `;
+
+            document.querySelectorAll(".btn-solicitar").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    alert(`🎉 Solicitação registrada!\n\nItem: ${btn.dataset.nome}\nEscola: ${btn.dataset.escola}\n\nEntre em contato com a escola para retirar. Aqueça um coração! ❤️`);
+                });
+            });
+        }
+
+        function categoriaLabel(tipo) {
+            const labels = {
+                adulto: "👔 Adulto",
+                infantil: "🧸 Infantil",
+                calcados: "👟 Calçado",
+                cobertores: "🛏️ Cobertor",
+                acessorios: "🧣 Acessório"
+            };
+            return labels[tipo] || tipo;
+        }
+
+        function iconePorPeca(peca) {
+            const icones = {
+                adulto: peca.genero === "masculino" ? "🧥👨" : peca.genero === "feminino" ? "🧥👩" : "🧥🌟",
+                infantil: peca.genero === "masculino" ? "🧸👦" : peca.genero === "feminino" ? "🧸👧" : "🧸🌟",
+                calcados: "👟",
+                cobertores: "🛏️",
+                acessorios: "🧣"
+            };
+            return icones[peca.tipo] || "🎁";
+        }
+
+        function generoTexto(genero) {
+            return { masculino: "👨 Masculino", feminino: "👩 Feminino", unissex: "🌟 Unissex" }[genero];
+        }
+
+        // Eventos de filtro de categoria
+        document.querySelectorAll("[data-categoria]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll("[data-categoria]").forEach(b => b.classList.remove("ativo"));
+                btn.classList.add("ativo");
+                categoriaAtual = btn.dataset.categoria;
+                tamanhoSelecionado = null;
+                infoSelecao.style.display = "none";
+                renderizarTamanhos();
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Escolha um tamanho acima para ver os itens disponíveis</div>`;
+            });
+        });
+
+        // Eventos de filtro de gênero
+        document.querySelectorAll("[data-genero]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll("[data-genero]").forEach(b => b.classList.remove("ativo"));
+                btn.classList.add("ativo");
+                generoAtual = btn.dataset.genero;
+                tamanhoSelecionado = null;
+                infoSelecao.style.display = "none";
+                renderizarTamanhos();
+                pecasContainer.innerHTML = `<div class="sem-pecas">👈 Escolha um tamanho acima para ver os itens disponíveis</div>`;
+            });
+        });
+
+        // Inicialização
+        renderizarTamanhos();
+
+        // Script do Botão Voltar ao Topo
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
